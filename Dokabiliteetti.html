@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<title>Docability</title>
+<style>
+  body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 40px;
+  }
+  input, select {
+    margin: 10px;
+    padding: 8px;
+    font-size: 16px;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #result {
+    margin-top: 20px;
+    font-size: 24px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🍺 Docability Calculator</h1>
+
+<div>
+  <label>Currency:</label><br>
+  <select id="currency">
+    <option value="EUR">€</option>
+    <option value="HUF">HUF</option>
+    <option value="CZK">CZK</option>
+    <option value="NOK">NOK</option>
+    <option value="CAD">CAD</option>
+  </select>
+</div>
+
+<div>
+  <label>Where are you buying alcohol?</label><br>
+  <select id="country">
+    <option value="FIN">Finland</option>
+    <option value="NOR">Norway</option>
+    <option value="GER">Germany</option>
+  </select>
+</div>
+
+<div>
+  <input type="number" id="percent" placeholder="Alcohol (%)" step="0.1"><br>
+ <input type="number" id="volume" placeholder="Volume (l)" step="0.01">
+  <input type="number" id="price" placeholder="Price">
+</div>
+
+<button onclick="calculate()">Calculate</button>
+
+<div id="result" style="padding:20px; border-radius:10px; display:inline-block;"></div>
+
+<script>
+function calculate() {
+  let percent = parseFloat(document.getElementById("percent").value);
+  let volume = parseFloat(document.getElementById("volume").value);
+  let price = parseFloat(document.getElementById("price").value);
+  let currency = document.getElementById("currency").value;
+  let country = document.getElementById("country").value;
+
+  if (!percent || !volume || !price) {
+    document.getElementById("result").innerText = "Täytä kaikki kentät!";
+    return;
+  }
+
+  // Kiinteät valuuttakurssit (päivitä tarvittaessa)
+  const rates = {
+    EUR: 1,
+    NOK: 11.0,
+    CZK: 24.5,
+    HUF: 390,
+    CAD: 1.5
+  };
+
+  // Muunna euroiksi
+  let priceEUR = price / rates[currency];
+
+  // Lasku (Excel-kaava)
+  let value = (volume * percent) / priceEUR;
+
+  // Scale
+  let grade = "";
+
+  if (country === "NOR") {
+    if (value > 1.05) grade = "A";
+    else if (value >= 0.85) grade = "B";
+    else if (value >= 0.65) grade = "C";
+    else if (value >= 0.50) grade = "D";
+    else grade = "E";
+  }
+
+  if (country === "FIN") {
+    if (value > 1.45) grade = "A";
+    else if (value >= 1.25) grade = "B";
+    else if (value >= 1.10) grade = "C";
+    else if (value >= 0.95) grade = "D";
+    else grade = "E";
+  }
+
+  if (country === "GER") {
+    if (value > 3.00) grade = "A";
+    else if (value >= 2.60) grade = "B";
+    else if (value >= 2.40) grade = "C";
+    else if (value >= 2.20) grade = "D";
+    else grade = "E";
+  }
+
+  // Värit
+  let color = "";
+  if (grade === "A") color = "#4CAF50";
+  if (grade === "B") color = "#8BC34A";
+  if (grade === "C") color = "#FFEB3B";
+  if (grade === "D") color = "#FF9800";
+  if (grade === "E") color = "#F44336";
+
+  let resultDiv = document.getElementById("result");
+  resultDiv.style.backgroundColor = color;
+
+  resultDiv.innerHTML =
+    "Dokabiliteetti: " + value.toFixed(2) +
+    "<br>Luokitus: " + grade;
+}
+</script>
+
+</body>
+</html>
