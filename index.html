@@ -5,7 +5,10 @@
 <title>Docability</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  <style>
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     font-family: Arial;
     background: #f5f5f5;
@@ -16,11 +19,16 @@
   .container {
     max-width: 400px;
     margin: auto;
-    background: white;
+    background: linear-gradient(to right);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+
+  .container:hover {
+    transform: scale(1.01);
   }
 
   input, select {
@@ -49,7 +57,21 @@
     padding: 15px;
     border-radius: 10px;
   }
-</style>
+/* Chrome, Safari, Edge */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input:focus, select:focus {
+  outline: none;
+  border: 1px solid #4CAF50;
+}
 </style>
 </head>
 <body>
@@ -96,7 +118,7 @@ function calculate() {
   let country = document.getElementById("country").value;
 
   if (!percent || !volume || !price) {
-    document.getElementById("result").innerText = "Täytä kaikki kentät!";
+    document.getElementById("result").innerText = "Please fill in all fields!";
     return;
   }
 
