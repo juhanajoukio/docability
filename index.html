@@ -175,6 +175,9 @@ function calculate() {
 let color = "";
 
 // 🇫🇮 SUOMI (A–J)
+let color = "";
+
+// 🇫🇮 SUOMI
 if (country === "FIN") {
   const gradeColorsFIN = {
     A: "#2e7d32",
@@ -189,16 +192,17 @@ if (country === "FIN") {
     J: "#b71c1c"
   };
 
-  color = gradeColorsFIN[grade];
+  color = gradeColorsFIN[grade] || "#cccccc";
 }
 
-// 🇳🇴 NORJA & 🇩🇪 SAKSA (A–E, vanha skaala)
+// 🇳🇴 🇩🇪
 else {
   if (grade === "A") color = "#4CAF50";
   else if (grade === "B") color = "#8BC34A";
   else if (grade === "C") color = "#FFEB3B";
   else if (grade === "D") color = "#FF9800";
   else if (grade === "E") color = "#F44336";
+  else color = "#cccccc";
 }
 </script>
 </div>
