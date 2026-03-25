@@ -149,11 +149,18 @@ function calculate() {
   }
 
   if (country === "FIN") {
-    if (value > 1.45) grade = "A";
-    else if (value >= 1.25) grade = "B";
-    else if (value >= 1.10) grade = "C";
-    else if (value >= 0.95) grade = "D";
-    else grade = "E";
+  if (value >= 1.45) grade = "A";
+  else if (value >= 1.31) grade = "B";
+  else if (value >= 1.17) grade = "C";
+  else if (value >= 1.03) grade = "D";
+  else if (value >= 0.89) grade = "E";
+  else if (value >= 0.75) grade = "F";
+  else if (value >= 0.61) grade = "G";
+  else if (value >= 0.47) grade = "H";
+  else if (value >= 0.33) grade = "I";
+  else if (value >= 0.20) grade = "J";
+  else grade = "J";
+}
   }
 
   if (country === "GER") {
