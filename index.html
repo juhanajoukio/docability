@@ -171,11 +171,6 @@ function calculate() {
   }
 
   // Värit
- // Värit
-let color = "";
-
-// 🇫🇮 SUOMI (A–J)
-let color = "";
 
 // 🇫🇮 SUOMI
 if (country === "FIN") {
@@ -196,13 +191,23 @@ if (country === "FIN") {
 }
 
 // 🇳🇴 🇩🇪
-else {
+
+ else {
   if (grade === "A") color = "#4CAF50";
   else if (grade === "B") color = "#8BC34A";
   else if (grade === "C") color = "#FFEB3B";
   else if (grade === "D") color = "#FF9800";
   else if (grade === "E") color = "#F44336";
   else color = "#cccccc";
+}
+
+// 🔥 LISÄÄ TÄMÄ (puuttui kokonaan)
+let resultDiv = document.getElementById("result");
+resultDiv.style.backgroundColor = color;
+
+resultDiv.innerHTML =
+  "Docability: " + value.toFixed(2) +
+  "<br>Rating: " + grade;
 }
 </script>
 </div>
