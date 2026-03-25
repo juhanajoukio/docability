@@ -171,19 +171,34 @@ function calculate() {
   }
 
   // Värit
-  let color = "";
+ // Värit
+let color = "";
+
+// 🇫🇮 SUOMI (A–J)
+if (country === "FIN") {
+  const gradeColorsFIN = {
+    A: "#2e7d32",
+    B: "#388e3c",
+    C: "#4CAF50",
+    D: "#8BC34A",
+    E: "#CDDC39",
+    F: "#FFEB3B",
+    G: "#FFC107",
+    H: "#FF9800",
+    I: "#F44336",
+    J: "#b71c1c"
+  };
+
+  color = gradeColorsFIN[grade];
+}
+
+// 🇳🇴 NORJA & 🇩🇪 SAKSA (A–E, vanha skaala)
+else {
   if (grade === "A") color = "#4CAF50";
-  if (grade === "B") color = "#8BC34A";
-  if (grade === "C") color = "#FFEB3B";
-  if (grade === "D") color = "#FF9800";
-  if (grade === "E") color = "#F44336";
-
-  let resultDiv = document.getElementById("result");
-  resultDiv.style.backgroundColor = color;
-
-  resultDiv.innerHTML =
-    "Docability: " + value.toFixed(2) +
-    "<br>Rating: " + grade;
+  else if (grade === "B") color = "#8BC34A";
+  else if (grade === "C") color = "#FFEB3B";
+  else if (grade === "D") color = "#FF9800";
+  else if (grade === "E") color = "#F44336";
 }
 </script>
 </div>
